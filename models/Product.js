@@ -9,7 +9,7 @@ class Product extends Model { }
 // set up fields and rules for Product model
 Product.init(
   {
-    // define columns: id, product name, price. Ensure price is validated as a decimal.
+    // define columns: id, product name, price, stock and category_id. Ensure price is validated as a decimal. Ensure stock has a default value of 10. Ensure that the category_id is a forgeign key of the id from the Category.js file
     id: {
       type: DataTypes.INTEGER,
       allowNull: false,
