@@ -16,7 +16,7 @@ router.get('/', async (req, res) => {
   } catch (error) {
     //error handling
     console.error(error);
-    res.status(500).res.json(error, "Oops! Something went wrong. No categories here!")
+    res.status(500).json(error, "Oops! Something went wrong. No categories here!")
   }
 });
 
@@ -24,9 +24,11 @@ router.get('/:id', async (req, res) => {
   // find one category by its `id` value
   // be sure to include its associated Products
   try {
+    //find category by primary key based on the id parameters.
     const getCatId = await Category.findByPk(req.params.id);
     console.log(getCatId);
-    // ), {
+
+    //find all products where the category id is equal to the id parameters
     const getProducts = await Product.findAll({
       where: {
         categoryId: req.params.id
