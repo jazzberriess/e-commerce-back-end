@@ -22,9 +22,23 @@ router.get('/', async (req, res) => {
   }
 });
 
-router.get('/:id', (req, res) => {
+router.get('/:id', async (req, res) => {
   // find a single tag by its `id`
   // be sure to include its associated Product data
+  try {
+    //find category by primary key based on the id parameters.
+    const getTagId = await Tag.findByPk(req.params.id, {
+
+      //include the category details for the product
+      include: [{ model: Product }]
+    });
+    console.log(getTagId);
+    res.status(200).json({ getTagId });
+
+  } catch (error) {
+    res.status(500).json(error);
+  }
+
 });
 
 router.post('/', (req, res) => {

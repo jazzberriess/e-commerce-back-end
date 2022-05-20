@@ -9,7 +9,9 @@ router.get('/', async (req, res) => {
 
   try {
     //find all items in the Category model in the database.
-    const getCategories = await Category.findAll();
+    const getCategories = await Category.findAll({
+      include: { model: Product }
+    });
 
     //return all items found.
     res.status(200).json(getCategories);
@@ -20,22 +22,39 @@ router.get('/', async (req, res) => {
   }
 });
 
+// router.get('/:id', async (req, res) => {
+//   // find one category by its `id` value
+//   // be sure to include its associated Products
+//   try {
+//     //find category by primary key based on the id parameters.
+//     const getCatId = await Category.findByPk(req.params.id);
+//     console.log(getCatId);
+
+//     //find all products where the category id is equal to the id parameters
+//     const getProducts = await Product.findAll({
+//       where: {
+//         categoryId: req.params.id
+//       }
+//     });
+//     console.log(req.params.id);
+//     res.status(200).json({ getCatId, getProducts });
+
+//   } catch (error) {
+//     res.status(500).json(error);
+//   }
+
+// });
+
 router.get('/:id', async (req, res) => {
   // find one category by its `id` value
   // be sure to include its associated Products
   try {
-    //find category by primary key based on the id parameters.
-    const getCatId = await Category.findByPk(req.params.id);
-    console.log(getCatId);
-
-    //find all products where the category id is equal to the id parameters
-    const getProducts = await Product.findAll({
-      where: {
-        categoryId: req.params.id
-      }
+    //find category by primary key based on the id parameters and include the product details.
+    const getCatId = await Category.findByPk(req.params.id, {
+      include: { model: Product }
     });
-    console.log(req.params.id);
-    res.status(200).json({ getCatId, getProducts });
+
+    res.status(200).json({ getCatId });
 
   } catch (error) {
     res.status(500).json(error);
