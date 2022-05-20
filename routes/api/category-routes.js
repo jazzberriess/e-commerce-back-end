@@ -8,19 +8,39 @@ router.get('/', async (req, res) => {
   // be sure to include its associated Products
 
   try {
+    //find all items in the Category model in the database.
     const getCategories = await Category.findAll();
-    console.log(getCategories);
+
+    //return all items found.
     res.status(200).json(getCategories);
   } catch (error) {
+    //error handling
     console.error(error);
-    res.status(500).res.json(error, "Whoops! Wrong way.")
+    res.status(500).res.json(error, "Oops! Something went wrong. No categories here!")
   }
 });
 
-router.get('/:id', (req, res) => {
+router.get('/:id', async (req, res) => {
   // find one category by its `id` value
   // be sure to include its associated Products
+  try {
+    const getCatId = await Category.findByPk(req.params.id);
+    console.log(getCatId);
+    // ), {
+    const getProducts = await Product.findAll({
+      where: {
+        categoryId: req.params.id
+      }
+    });
+    console.log(req.params.id);
+    res.status(200).json({ getCatId, getProducts });
+
+  } catch (error) {
+    res.status(500).json(error);
+  }
+
 });
+
 
 router.post('/', (req, res) => {
   // create a new category
