@@ -45,9 +45,9 @@ router.post('/', async (req, res) => {
   try {
     //create a new tag based on the data entered into the request body.
     const createTag = await Tag.create({
-      tagName: req.body.tagName,
+      tag_name: req.body.tag_name,
     });
-    res.status(200).json(createTag, `Created tag: ${req.body.tagName}`);
+    res.status(200).json(createTag, `Created tag: ${req.body.tag_name}`);
   } catch (error) {
     res.status(400).json(error)
   }
@@ -57,7 +57,7 @@ router.put('/:id', async (req, res) => {
   // update a tag's name by its `id` value
   try {
     const updateTag = await Tag.update({
-      tagName: req.body.tagName
+      tag_name: req.body.tag_name
     },
       {
         where: {
