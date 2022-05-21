@@ -99,8 +99,7 @@ router.delete('/:id', async (req, res) => {
         id: req.params.id
       }
     })
-    console.log(deleteCategory);
-    res.status(200).json(`Deleted category ${req.params.id}`);
+    res.status(200).json(deleteCategory, `Deleted category ID: ${req.params.id}`);
   } catch (error) {
     res.status(400).json(error)
   }
