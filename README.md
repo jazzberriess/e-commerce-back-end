@@ -65,7 +65,7 @@ Responses will be printed in the API client.
 in the integrated terminal in VS Code for sourcing and seeding the database. API requests are tested in Insomnia.
 
 ### Gif demo of the 'category' API calls:
-![Gif demo of the application's category API calls](./images/demo-category-api-requests.gif)
+![Gif demo of the application's category API calls](./images/demo-category-api-calls.gif)
 
 ## Resources
 * [Sequelize Documentation](https://sequelize.org/docs/v6/getting-started/)
