@@ -10,7 +10,7 @@ router.get('/', async (req, res) => {
     //find all items in the Tag model in the database.
     const getAllTags = await Tag.findAll({
       //and include the products tagged
-      include: [{ model: Product }]
+      include: [{ model: Product, }]
     });
 
     //return all items found.

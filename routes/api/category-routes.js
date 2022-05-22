@@ -54,7 +54,7 @@ router.get('/:id', async (req, res) => {
       include: { model: Product }
     });
 
-    res.status(200).json({ getCatId });
+    res.status(200).json(getCatId);
 
   } catch (error) {
     res.status(500).json(error);
