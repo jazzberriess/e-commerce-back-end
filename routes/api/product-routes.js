@@ -10,7 +10,7 @@ router.get('/', async (req, res) => {
   try {
     //find all items in the Product model in the database.
     const getAllProducts = await Product.findAll({
-      //and include their categroy
+      //and include their category and tags
       include: [{ model: Category, model: Tag }]
     });
 
@@ -29,14 +29,15 @@ router.get('/:id', async (req, res) => {
   // find a single product by its `id`
   // be sure to include its associated Category and Tag data
   try {
-    //find category by primary key based on the id parameters.
+    //find product by primary key based on the id parameters.
     const getProdId = await Product.findByPk(req.params.id, {
 
-      //include the category details for the product
+      //include the category and tag details for the product
       include: [{ model: Category, model: Tag }]
     });
+    //if the ID doesn't exist, tell the user
     if (!getProdId) {
-      res.json("Oops! A product with that ID doesn't exist!");
+      res.json({ "Message": "Oops! A product with that ID doesn't exist!" });
     } else {
       console.log(`\x1b[38;5;126mShowing product ID: ${req.params.id}\x1b[0m`)
       res.status(200).json(getProdId);
@@ -56,6 +57,10 @@ router.post('/', async (req, res) => {
     stock: req.body.stock,
     category_id: req.body.category_id,
     tagIds: req.body.tagIds,
+  }
+
+  if (newProduct.product_name === "") {
+    return res.json({ "Message": "You must enter a product name!" })
   }
 
   await Product.create(newProduct)

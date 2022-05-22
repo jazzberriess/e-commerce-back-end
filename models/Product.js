@@ -19,7 +19,8 @@ Product.init(
     product_name: {
       type: DataTypes.STRING,
       allowNull: false,
-      defaultValue: "Taro Milk Tea",
+      //adding default value for product as we do not allow null
+      // defaultValue: "Taro Milk Tea",
     },
     price: {
       type: DataTypes.DECIMAL,

@@ -28,15 +28,15 @@ router.get('/:id', async (req, res) => {
   // be sure to include its associated Product data
   try {
 
-    //find category by primary key based on the id parameters.
+    //find tag by primary key based on the id parameters.
     const getTagId = await Tag.findByPk(req.params.id, {
 
-      //include the category details for the product
+      //include the product details for the tag
       include: [{ model: Product }]
     });
-
+    //if there's no tag with that ID, tell the user
     if (!getTagId) {
-      res.json("Oops! A tag with that ID doesn't exist!");
+      res.json({ "Message": "Oops! A tag with that ID doesn't exist!" });
     } else {
       res.status(200).json(getTagId);
     }
@@ -78,7 +78,7 @@ router.put('/:id', async (req, res) => {
 });
 
 router.delete('/:id', async (req, res) => {
-  // delete on tag by its `id` value
+  // delete a tag by its `id` value
   try {
     Tag.destroy({
       where: {

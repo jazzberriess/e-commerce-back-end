@@ -3,11 +3,6 @@ const routes = require('./routes');
 // import sequelize connection
 const sequelize = require('./config/connection');
 
-// const Category = require("./models/Category");
-// const Product = require("./models/Product");
-// const ProductTag = require("./models/ProductTag");
-// const Tag = require("./models/Tag");
-
 const app = express();
 const PORT = process.env.PORT || 3001;
 
@@ -16,7 +11,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(routes);
 
-// sync sequelize models to the database, then turn on the server
+// sync sequelize models to the database, then turn on the server. Set force to false as setting it to true was wiping seeded data from the db upon npm start
 sequelize.sync({ force: false }).then(() => {
   app.listen(PORT, () =>
     console.log(`App listening on port ${PORT}!`));
