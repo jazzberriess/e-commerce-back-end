@@ -136,6 +136,7 @@ router.delete('/:id', async (req, res) => {
       }
     })
     console.log(`\x1b[38;5;126mDeleted product ID: ${req.params.id}\x1b[0m`);
+
     res.status(200).json(destroyProduct);
   } catch (error) {
     res.status(400).json(error)
