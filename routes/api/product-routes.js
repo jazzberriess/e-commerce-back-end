@@ -60,12 +60,13 @@ router.post('/', async (req, res) => {
   }
 
   if (newProduct.product_name === "") {
-    return res.json({ "Message": "You must enter a product name!" })
+    return res.json({ "Message": "You must enter a product name!" });
   }
 
   await Product.create(newProduct)
     .then((product) => {
       // if there's product tags, we need to create pairings to bulk create in the ProductTag model
+
       if (req.body.tagIds.length) {
         const productTagIdArr = req.body.tagIds.map((tag_id) => {
           return {
@@ -98,8 +99,17 @@ router.put('/:id', (req, res) => {
       return ProductTag.findAll({ where: { product_id: req.params.id } });
     })
     .then((productTags) => {
+      console.log(productTags)
+      if (productTags.length === 0) {
+        res.status(200).json({ "Message": "Product updated!" });
+      }
       // get list of current tag_ids
       const productTagIds = productTags.map(({ tag_id }) => tag_id);
+
+      if (!req.body.tagIds) {
+        return productTagIds;
+      }
+
       // create filtered list of new tag_ids
       const newProductTags = req.body.tagIds
         .filter((tag_id) => !productTagIds.includes(tag_id))
