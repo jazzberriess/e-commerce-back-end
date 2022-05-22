@@ -70,7 +70,7 @@ in the integrated terminal in VS Code for sourcing and seeding the database. API
 ## Resources
 * [Sequelize Documentation](https://sequelize.org/docs/v6/getting-started/)
 * [Sequelize's Update Method - example included](https://medium.com/@sarahdherr/sequelizes-update-method-example-included-39dfed6821d)
-*[How to implement many to many association in sequelize](https://stackoverflow.com/questions/22958683/how-to-implement-many-to-many-association-in-sequelize)
+* [How to implement many to many association in sequelize](https://stackoverflow.com/questions/22958683/how-to-implement-many-to-many-association-in-sequelize)
 * [Using underscored: true still returns attributes in camelCase](https://github.com/sequelize/sequelize/issues/10857#issuecomment-601471753)
 * [Why does Sequelize add extra columns to SELECT query?](https://stackoverflow.com/questions/49424040/why-does-sequelize-add-extra-columns-to-select-query)
 * [duplicate foreign key column using sequelize](https://stackoverflow.com/questions/32870428/duplicate-foreign-key-column-using-sequelize)
