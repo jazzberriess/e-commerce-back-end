@@ -14,6 +14,7 @@ router.get('/', async (req, res) => {
     });
 
     //return all items found.
+    console.log(`\x1b[38;5;126mAll tags obtained!\x1b[0m`)
     res.status(200).json(getAllTags);
   } catch (error) {
     //error handling
@@ -26,15 +27,19 @@ router.get('/:id', async (req, res) => {
   // find a single tag by its `id`
   // be sure to include its associated Product data
   try {
+
     //find category by primary key based on the id parameters.
     const getTagId = await Tag.findByPk(req.params.id, {
 
       //include the category details for the product
       include: [{ model: Product }]
     });
-    console.log(getTagId);
-    res.status(200).json({ getTagId });
 
+    if (!getTagId) {
+      res.json("Oops! A tag with that ID doesn't exist!");
+    } else {
+      res.status(200).json(getTagId);
+    }
   } catch (error) {
     res.status(500).json(error);
   }
@@ -47,7 +52,8 @@ router.post('/', async (req, res) => {
     const createTag = await Tag.create({
       tag_name: req.body.tag_name,
     });
-    res.status(200).json(createTag, `Created tag: ${req.body.tag_name}`);
+    console.log(`\x1b[38;5;126mCreated tag: ${req.body.tag_name}\x1b[0m`);
+    res.status(200).json(createTag);
   } catch (error) {
     res.status(400).json(error)
   }
@@ -64,7 +70,7 @@ router.put('/:id', async (req, res) => {
           id: req.params.id
         }
       })
-    console.log(updateTag)
+    console.log(`\x1b[38;5;126m Updated tag to: ${req.body.tag_name}\x1b[0m`)
     res.status(200).json(updateTag);
   } catch (error) {
     res.status(400).json(error)
@@ -80,7 +86,7 @@ router.delete('/:id', async (req, res) => {
       }
     })
 
-    res.status(200).json(`Deleted tag ID: ${req.params.id}`);
+    res.status(200).json(`\x1b[38;5;126mDeleted tag ID: ${req.params.id}\x1b[0m`);
   } catch (error) {
     res.status(400).json(error)
   }

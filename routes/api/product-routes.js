@@ -15,6 +15,7 @@ router.get('/', async (req, res) => {
     });
 
     //return all items found.
+    console.log(`\x1b[38;5;126mAll products obtained!\x1b[0m`)
     res.status(200).json(getAllProducts);
   } catch (error) {
     //error handling
@@ -34,9 +35,12 @@ router.get('/:id', async (req, res) => {
       //include the category details for the product
       include: [{ model: Category, model: Tag }]
     });
-    console.log(getProdId);
-    res.status(200).json(getProdId);
-
+    if (!getProdId) {
+      res.json("Oops! A product with that ID doesn't exist!");
+    } else {
+      console.log(`\x1b[38;5;126mShowing product ID: ${req.params.id}\x1b[0m`)
+      res.status(200).json(getProdId);
+    }
   } catch (error) {
     res.status(500).json(error);
   }
@@ -54,7 +58,7 @@ router.post('/', async (req, res) => {
     tagIds: req.body.tagIds,
   }
 
-  Product.create(newProduct)
+  await Product.create(newProduct)
     .then((product) => {
       // if there's product tags, we need to create pairings to bulk create in the ProductTag model
       if (req.body.tagIds.length) {
@@ -121,12 +125,13 @@ router.put('/:id', (req, res) => {
 router.delete('/:id', async (req, res) => {
   // delete one product by its `id` value
   try {
-    Product.destroy({
+    const destroyProduct = await Product.destroy({
       where: {
         id: req.params.id
       }
     })
-    res.status(200).json(`Deleted product ID: ${req.params.id}`);
+    console.log(`\x1b[38;5;126mDeleted product ID: ${req.params.id}\x1b[0m`);
+    res.status(200).json(destroyProduct);
   } catch (error) {
     res.status(400).json(error)
   }
