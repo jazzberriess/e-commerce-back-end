@@ -35,7 +35,7 @@ router.get('/:id', async (req, res) => {
       include: [{ model: Category, model: Tag }]
     });
     console.log(getProdId);
-    res.status(200).json({ getProdId });
+    res.status(200).json(getProdId);
 
   } catch (error) {
     res.status(500).json(error);
@@ -53,14 +53,7 @@ router.post('/', async (req, res) => {
     category_id: req.body.category_id,
     tagIds: req.body.tagIds,
   }
-  /* req.body should look like this...
-    {
-      product_name: "Basketball",
-      price: 200.00,
-      stock: 3,
-      tagIds: [1, 2, 3, 4]
-    }
-  */
+
   Product.create(newProduct)
     .then((product) => {
       // if there's product tags, we need to create pairings to bulk create in the ProductTag model
@@ -128,12 +121,12 @@ router.put('/:id', (req, res) => {
 router.delete('/:id', async (req, res) => {
   // delete one product by its `id` value
   try {
-    const deleteProduct = await Product.destroy({
+    Product.destroy({
       where: {
         id: req.params.id
       }
     })
-    res.status(200).json(`${deleteProduct}. Deleted product ID: ${req.params.id}`);
+    res.status(200).json(`Deleted product ID: ${req.params.id}`);
   } catch (error) {
     res.status(400).json(error)
   }
