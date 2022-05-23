@@ -61,7 +61,7 @@ You can then make API requests and update data in Insomnia or your API client of
 Responses will be printed in the API client.
 
 ## Live Demo
-### [Video demonstration of the application being used](https://drive.google.com/file/d/1K9t86SzMkcO1G-ORgk4DgXfTfBcnRQ7m/view)
+### [Video demonstration of the application being used](https://drive.google.com/file/d/1HJ6fjNTu7-QBqOmlwHg-kZFcLHs7nqnQ/view)
 in the integrated terminal in VS Code for sourcing and seeding the database. API requests are tested in Insomnia.
 
 ### Gif demo of the 'category' API calls:

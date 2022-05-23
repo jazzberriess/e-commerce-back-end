@@ -84,6 +84,7 @@ router.delete('/:id', async (req, res) => {
         id: req.params.id
       }
     })
+    console.log(destroyCategory);
     console.log(`\x1b[38;5;126mDeleted category ID: ${req.params.id}\x1b[0m`);
     res.status(200).json(destroyCategory);
   } catch (error) {

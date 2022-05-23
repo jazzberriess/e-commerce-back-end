@@ -101,7 +101,7 @@ router.put('/:id', (req, res) => {
     .then((productTags) => {
       console.log(productTags)
       if (productTags.length === 0) {
-        res.status(200).json({ "Message": "Product updated!" });
+        console.log("Product updated!");
       }
       // get list of current tag_ids
       const productTagIds = productTags.map(({ tag_id }) => tag_id);
